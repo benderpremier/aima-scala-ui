@@ -7,9 +7,13 @@ import scalacss.ScalaCssReact._
 object Main {
   val component = ScalaComponent.builder[Unit]("Main")
     .renderStatic(<.div(
-      app.Styles.app,
-      Header(),
-      Content()))
+      ^.cls := "container-fluid",
+//      app.Styles.app,
+        <.div(
+          ^.cls := "row",
+          SideBar(),
+          Content()
+        )))
     .build
   def apply() = component()
 
