@@ -6,15 +6,18 @@ import scalacss.ScalaCssReact._
 
 object Main {
   val component = ScalaComponent.builder[Unit]("Main")
-    .renderStatic(<.div(
-      ^.cls := "container-fluid",
-//      app.Styles.app,
+    .render_(
+      <.div(
+        Header(),
         <.div(
-          ^.cls := "row",
-          SideBar(),
-          Content()
-        )))
+          ^.cls := "container-fluid",
+          <.div(
+            ^.cls := "row",
+            SideBar(),
+            Content()
+          ))))
     .build
+
   def apply() = component()
 
 }

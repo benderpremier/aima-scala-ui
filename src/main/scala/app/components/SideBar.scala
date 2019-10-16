@@ -9,8 +9,21 @@ object SideBar {
     ScalaComponent.builder[Unit]("SideBar")
       .renderStatic(<.div(
         ^.cls := "col-4",
-        <.h2("AIMA")
+        <.nav(
+          ^.cls := "nav flex-column",
+          <.a(
+            ^.cls := "nav-link",
+            ^.href := "#",
+            "Chapter 1"
+          ),
+          <.a(
+            ^.cls := "nav-link",
+            ^.href := "#",
+            "Chapter 2"
+          )
+        )
       ))
       .build
+
   def apply() = component()
 }
