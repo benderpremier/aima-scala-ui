@@ -23,6 +23,7 @@ lazy val jsLibrariesSettings = Def.setting(
     "org.scala-js" %%% "scalajs-dom" % "0.9.7",
     // SCALA-JS REACT
     "com.github.japgolly.scalajs-react" %%% "core" % "1.5.0-RC1",
+    "com.github.japgolly.scalajs-react" %%% "extra" % "1.5.0-RC1",
     "com.github.japgolly.scalacss" %%% "core" % "0.6.0-RC1",
     "com.github.japgolly.scalacss" %%% "ext-react" % "0.6.0-RC1"
   )
