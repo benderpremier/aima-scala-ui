@@ -1,13 +1,13 @@
 package app
 
-import app.components.Main
 import org.scalajs.dom.document
 import CssSettings._
+import app.routes.AppRouter
 import scalacss.ScalaCssReact._
 
 object App {
   def main(args: Array[String]): Unit = {
     Styles.addToDocument()
-    Main().renderIntoDOM(document.getElementById("root"))
+    AppRouter.router().renderIntoDOM(document.getElementById("root"))
   }
 }

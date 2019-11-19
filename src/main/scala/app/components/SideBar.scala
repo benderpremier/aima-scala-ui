@@ -1,29 +1,32 @@
 package app.components
 
+import app.routes.Chapter
 import japgolly.scalajs.react.ScalaComponent
-import japgolly.scalajs.react.vdom.html_<^._
-import scalacss.ScalaCssReact._
+import japgolly.scalajs.react.extra.router.RouterCtl
+import japgolly.scalajs.react.vdom.html_<^.{<, _}
 
 object SideBar {
+
+  case class Props(menus: Vector[Chapter],
+                   selectedPage: Chapter,
+                   ctrl: RouterCtl[Chapter])
+
   val component =
-    ScalaComponent.builder[Unit]("SideBar")
-      .renderStatic(<.div(
-        ^.cls := "col-4",
+    ScalaComponent
+      .builder[Props]("SideBar")
+      .render_P { P =>
         <.nav(
           ^.cls := "nav flex-column",
-          <.a(
-            ^.cls := "nav-link",
-            ^.href := "#",
-            "Chapter 1"
-          ),
-          <.a(
-            ^.cls := "nav-link",
-            ^.href := "#",
-            "Chapter 2"
+          P.menus.toTagMod(chapter =>
+              <.a(
+                ^.href := P.ctrl.urlFor(chapter).value,
+                ^.cls := "nav-link",
+                chapter.routerPath,
+                P.ctrl.setOnLinkClick(chapter))
           )
         )
-      ))
+      }
       .build
 
-  def apply() = component()
+  def apply(props: Props) = component(props)
 }
