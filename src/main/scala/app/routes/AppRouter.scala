@@ -37,7 +37,7 @@ object AppRouter {
       r.render()
     )
 
-  val baseUrl = BaseUrl.fromWindowOrigin / "index.html"
+  val baseUrl = BaseUrl.fromWindowOrigin / "index-dev.html"
 
   val router = Router(baseUrl, config)
 
