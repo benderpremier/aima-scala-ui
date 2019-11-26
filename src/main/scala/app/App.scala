@@ -2,6 +2,7 @@ package app
 
 import org.scalajs.dom.document
 import CssSettings._
+import app.components.vacuum.Styles
 import app.routes.AppRouter
 import scalacss.ScalaCssReact._
 
