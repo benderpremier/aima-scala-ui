@@ -9,9 +9,11 @@ import scalacss.ScalaCssReact._
 
 object Header {
 
-  case class Props(menus: Vector[Menu],
-                   selectedPage: AppPage,
-                   ctrl: RouterCtl[AppPage])
+  case class Props(
+      menus: Vector[Menu],
+      selectedPage: AppPage,
+      ctrl: RouterCtl[AppPage]
+  )
 
   val dataToggle = VdomAttr("data-toggle")
   val dataTarget = VdomAttr("data-target")
@@ -43,7 +45,7 @@ object Header {
             ^.id := "navbarNav",
             <.div(
               ^.cls := "navbar-nav",
-              P.menus.toTagMod{ menu =>
+              P.menus.toTagMod { menu =>
                 <.a(
                   ^.cls := "nav-item nav-link",
                   menu.name,

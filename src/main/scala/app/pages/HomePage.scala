@@ -18,7 +18,7 @@ object HomePage {
 
   val component =
     ScalaComponent.builder
-      .static("HomePage")(<.div( "AIMA UI Home Page"))
+      .static("HomePage")(<.div("AIMA UI Home Page"))
       .build
 
   def apply() = component()

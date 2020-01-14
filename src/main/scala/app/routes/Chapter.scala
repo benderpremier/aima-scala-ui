@@ -6,10 +6,10 @@ import japgolly.scalajs.react.extra.router.RouterConfigDsl
 import japgolly.scalajs.react.vdom.VdomElement
 
 sealed abstract class Chapter(
-                             val chap: Int,
-                             val routerPath: String,
-                             val render: () => VdomElement
-                             )
+    val chap: Int,
+    val routerPath: String,
+    val render: () => VdomElement
+)
 
 object Chapter {
 
@@ -24,7 +24,7 @@ object Chapter {
     menu
       .map { m =>
         staticRoute(m.routerPath, m) ~> renderR(
-          r => ChapterPage(ChapterPage.Props(m,r))
+          r => ChapterPage(ChapterPage.Props(m, r))
         )
       }
       .reduce(_ | _)

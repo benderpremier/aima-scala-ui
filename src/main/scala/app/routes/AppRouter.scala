@@ -2,7 +2,12 @@ package app.routes
 
 import app.components.Header
 import app.menu.Menu
-import japgolly.scalajs.react.extra.router.{Resolution, RouterConfigDsl, RouterCtl, _}
+import japgolly.scalajs.react.extra.router.{
+  Resolution,
+  RouterConfigDsl,
+  RouterCtl,
+  _
+}
 import japgolly.scalajs.react.vdom.html_<^._
 import scalajsreact.template.pages.HomePage
 
@@ -10,7 +15,7 @@ object AppRouter {
 
   sealed trait AppPage
 
-  case object Home extends AppPage
+  case object Home                extends AppPage
   case class Chapters(c: Chapter) extends AppPage
 
   val config = RouterConfigDsl[AppPage].buildConfig { dsl =>
@@ -40,6 +45,5 @@ object AppRouter {
   val baseUrl = BaseUrl.fromWindowOrigin / "index-dev.html"
 
   val router = Router(baseUrl, config)
-
 
 }

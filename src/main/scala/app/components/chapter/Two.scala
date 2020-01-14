@@ -6,7 +6,8 @@ import japgolly.scalajs.react.vdom.html_<^._
 
 object Two {
 
-  val component = ScalaComponent.builder[Unit]("Two")
+  val component = ScalaComponent
+    .builder[Unit]("Two")
     .render_(
       <.div(
         <.h1("This is chapter two"),
