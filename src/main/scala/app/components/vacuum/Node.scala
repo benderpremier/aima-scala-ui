@@ -10,10 +10,11 @@ import aima.core.environment.vacuum.{
 import japgolly.scalajs.react.ScalaComponent
 import japgolly.scalajs.react.vdom.html_<^._
 import scalacss.ScalaCssReact._
+import aima.core.environment.vacuum.Vacuum
 
 object Node {
 
-  def renderAgent(agent: Agent[VacuumAction, VacuumPercept]) =
+  def renderAgent(agent: Agent[Vacuum, VacuumPercept, VacuumAction]) =
     <.i(
       ^.cls := "fas fa-robot align-middle"
     )
