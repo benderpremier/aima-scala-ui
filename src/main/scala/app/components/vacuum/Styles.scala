@@ -19,4 +19,7 @@ object Styles extends StyleSheet.Inline {
     backgroundColor(c"#919191")
   )
 
+  val stepTable = style(
+    )
+
 }

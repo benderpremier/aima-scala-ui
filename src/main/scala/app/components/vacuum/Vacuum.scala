@@ -24,26 +24,71 @@ object Vacuum {
       )
     }
 
-  val vacuumEnvironment = VacuumEnvironment().addAgent(agent)
+  def vacuumEnvironment = VacuumEnvironment().addAgent(agent)
 
-  case class State(env: VacuumEnvironment)
+  /**
+    * For each step we would like to know:
+    * - The state of the node on which the agent is
+    * - The list of percept the sensors are giving us
+    * - The action returned by the program for each percept
+    * - For each action the effect of the actuator (some are unreliable)
+    */
+  case class StepDetail(
+      step: Int,
+      agentNode: Option[VacuumMapNode],
+      runDetails: agent.RunDetail
+  )
+
+  case class State(
+      env: VacuumEnvironment,
+      currentStep: Int,
+      stepDetails: Vector[StepDetail]
+  ) {
+    def step: State = {
+      val step                  = currentStep + 1
+      val node                  = env.map.getAgentNode(agent)
+      val (nextEnv, runDetails) = agent.run(env)
+      val stepDetail            = StepDetail(step, node, runDetails)
+      State(nextEnv, step, stepDetails :+ stepDetail)
+    }
+  }
 
   class Backend($ : BackendScope[Unit, State]) {
     def programStep =
-      $.modState(s => s.copy(env = agent.run(s.env)))
+      $.modState(s => s.step)
+
+    def reset =
+      $.modState(_ => State(vacuumEnvironment, 0, Vector.empty))
 
     def render(s: State): VdomElement = <.div(
-      <.button(
-        "Advance",
-        ^.onClick --> programStep
+      ^.cls := "border",
+      <.div(
+        ^.cls := "m-3",
+        <.button(
+          "Advance",
+          ^.cls := "btn btn-primary btn-sm m-1",
+          ^.onClick --> programStep
+        ),
+        <.button(
+          "Reset",
+          ^.cls := "btn btn-warning btn-sm m-1",
+          ^.onClick --> reset
+        )
       ),
-      <.div(Map(s.env.map))
+      <.div(
+        ^.cls := "m-3",
+        Map(s.env.map)
+      ),
+      <.div(
+        ^.cls := "m-3",
+        StepTable(s.stepDetails)
+      )
     )
   }
 
   val component = ScalaComponent
     .builder[Unit]("VacuumEnvironment")
-    .initialState(State(vacuumEnvironment))
+    .initialState(State(vacuumEnvironment, 0, Vector.empty))
     .renderBackend[Backend]
     .build
 
